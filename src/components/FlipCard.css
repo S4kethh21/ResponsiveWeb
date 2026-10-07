@@ -1,0 +1,166 @@
+/* ==========================================================================
+   Reusable 3D Flip Card Architecture
+   Reliable 3D Transforms - Zero Layout Shift - Zero Clipping
+   ========================================================================== */
+
+.flip-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  border-radius: 18px;
+  /* Hover elevation only - NO rotation on hover */
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.flip-card:hover {
+  transform: translateY(-4px);
+}
+
+.flip-card:focus-visible {
+  outline: 2px solid var(--accent-blue, #3B82F6);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.flip-card.is-flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 18px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: #0B0F19;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1;
+}
+
+.flip-card-front {
+  transform: rotateY(0deg);
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  z-index: 2;
+  background: #090D17;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Pointer Events Management - ensures active face receives pointer events */
+.flip-card:not(.is-flipped) .flip-card-front {
+  pointer-events: auto;
+}
+.flip-card:not(.is-flipped) .flip-card-back {
+  pointer-events: none;
+}
+.flip-card.is-flipped .flip-card-front {
+  pointer-events: none;
+}
+.flip-card.is-flipped .flip-card-back {
+  pointer-events: auto;
+}
+
+/* Accent Glows & Borders */
+.flip-card.accent-blue:hover .flip-card-front,
+.flip-card.accent-blue.is-flipped .flip-card-back {
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow: 0 16px 36px rgba(59, 130, 246, 0.14);
+}
+
+.flip-card.accent-violet:hover .flip-card-front,
+.flip-card.accent-violet.is-flipped .flip-card-back {
+  border-color: rgba(139, 92, 246, 0.45);
+  box-shadow: 0 16px 36px rgba(139, 92, 246, 0.14);
+}
+
+.flip-card.accent-teal:hover .flip-card-front,
+.flip-card.accent-teal.is-flipped .flip-card-back {
+  border-color: rgba(20, 184, 166, 0.45);
+  box-shadow: 0 16px 36px rgba(20, 184, 166, 0.14);
+}
+
+.flip-card.accent-pink:hover .flip-card-front,
+.flip-card.accent-pink.is-flipped .flip-card-back {
+  border-color: rgba(236, 72, 153, 0.45);
+  box-shadow: 0 16px 36px rgba(236, 72, 153, 0.14);
+}
+
+.flip-card.accent-amber:hover .flip-card-front,
+.flip-card.accent-amber.is-flipped .flip-card-back {
+  border-color: rgba(245, 158, 11, 0.45);
+  box-shadow: 0 16px 36px rgba(245, 158, 11, 0.14);
+}
+
+/* Shared Back Layout */
+.flip-card-back-content {
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.flip-card-back-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+  flex-shrink: 0;
+}
+
+.flip-card-flip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.55rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.flip-card-flip-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .flip-card-inner {
+    transition: transform 0.05s linear;
+  }
+  .flip-card {
+    transition: none;
+  }
+}

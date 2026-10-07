@@ -1,0 +1,184 @@
+/* ==========================================================================
+   Made With Purpose - Left Vertical Selector List Styles
+   Fixed Heights - Stable Navigation - Zero Layout Jump
+   ========================================================================== */
+
+.about-selector-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  width: 100%;
+}
+
+.about-selector-option {
+  position: relative;
+  width: 100%;
+  min-height: 80px;
+  background: rgba(12, 16, 28, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1rem 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
+  outline: none;
+  color: var(--text-primary);
+  overflow: hidden;
+  /* Smooth transitions without layout shifts */
+  transition: background-color 0.25s ease,
+              border-color 0.25s ease,
+              box-shadow 0.25s ease,
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-selector-option:hover {
+  background: rgba(18, 24, 42, 0.85);
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateX(4px);
+}
+
+.about-selector-option:focus-visible {
+  outline: 2px solid var(--accent-blue, #3B82F6);
+  outline-offset: 2px;
+}
+
+/* Active Selected State */
+.about-selector-option.is-selected {
+  background: rgba(20, 27, 48, 0.95);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.about-selector-option.accent-blue.is-selected {
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.12);
+}
+
+.about-selector-option.accent-violet.is-selected {
+  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.12);
+}
+
+.about-selector-option.accent-teal.is-selected {
+  border-color: rgba(20, 184, 166, 0.5);
+  box-shadow: 0 8px 24px rgba(20, 184, 166, 0.12);
+}
+
+.about-selector-option.accent-pink.is-selected {
+  border-color: rgba(236, 72, 153, 0.5);
+  box-shadow: 0 8px 24px rgba(236, 72, 153, 0.12);
+}
+
+/* Left Indicator Stripe */
+.selector-active-stripe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.about-selector-option.accent-blue.is-selected .selector-active-stripe {
+  background: #3B82F6;
+  box-shadow: 0 0 10px #3B82F6;
+}
+
+.about-selector-option.accent-violet.is-selected .selector-active-stripe {
+  background: #8B5CF6;
+  box-shadow: 0 0 10px #8B5CF6;
+}
+
+.about-selector-option.accent-teal.is-selected .selector-active-stripe {
+  background: #14B8A6;
+  box-shadow: 0 0 10px #14B8A6;
+}
+
+.about-selector-option.accent-pink.is-selected .selector-active-stripe {
+  background: #EC4899;
+  box-shadow: 0 0 10px #EC4899;
+}
+
+/* Leading Column (Number + Icon) */
+.selector-option-leading {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+}
+
+.selector-option-num {
+  font-family: monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.selector-option-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Text Block */
+.selector-option-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.selector-option-title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin: 0;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.selector-option-subtitle {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.about-selector-option.is-selected .selector-option-subtitle {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Trailing Arrow Indicator */
+.selector-option-trailing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: transform 0.25s ease, color 0.25s ease;
+  flex-shrink: 0;
+}
+
+.about-selector-option:hover .selector-chevron {
+  color: #FFFFFF;
+  transform: translateX(2px);
+}
+
+.about-selector-option.is-selected .selector-chevron {
+  color: #38BDF8;
+  transform: translateX(3px);
+}
